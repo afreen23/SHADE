@@ -37,7 +37,7 @@ TWITTER_HANDLE=''
 def index():
     return render_template('index.html')
 
-@app.route('/home',methods=['POST'])
+@app.route('/home',methods=['GET','POST'])
 #sentiment analysis
 def sentiment_analysis():
     request_data=request.get_json()
@@ -56,35 +56,34 @@ def sentiment_analysis():
     return "Success"
 
 
-#tone analysis
-def tone_analysis(tweet):
-    analysed_tones =[]  
-    try:
-        tone_analysis = tone_analyzer.tone(
-        {'text': tweet.text},
-        'application/json'
-    ).get_result()
-    except WatsonApiException as ex:
-        print("Method failed with status code " + str(ex.code) + ": " + ex.message)
-    tones = tone_analysis['document_tone']['tones']
-    for tone in tones:
-        if tone["score"]>=0.75:
-            analysed_tones.append({'tone':tone["tone_name"],'score':tone['score']})
-    return analysed_tones
+    #tone analysis
+    def tone_analysis(tweet):
+        analysed_tones =[]  
+        try:
+            tone_analysis = tone_analyzer.tone(
+            {'text': tweet.text},
+            'application/json'
+        ).get_result()
+        except WatsonApiException as ex:
+            print("Method failed with status code " + str(ex.code) + ": " + ex.message)
+        tones = tone_analysis['document_tone']['tones']
+        for tone in tones:
+            if tone["score"]>=0.75:
+                analysed_tones.append({'tone':tone["tone_name"],'score':tone['score']})
+        return analysed_tones
 
-#nlu analysis
-def nlu_analysis(tweet):
-    response=''
-    try:
-        response = natural_language_understanding.analyze(
-        text=tweet,
-        features=Features(
-            emotion=EmotionOptions(),
-            sentiment=SentimentOptions()
-            )).get_result()
-    except WatsonApiException as ex:
-        print("Method failed with status code " + str(ex.code) + ": " + ex.message)
-    return response
-
+    #nlu analysis
+    def nlu_analysis(tweet):
+        response=''
+        try:
+            response = natural_language_understanding.analyze(
+            text=tweet,
+            features=Features(
+                emotion=EmotionOptions(),
+                sentiment=SentimentOptions()
+                )).get_result()
+        except WatsonApiException as ex:
+            print("Method failed with status code " + str(ex.code) + ": " + ex.message)
+        return response
 
 app.run()
