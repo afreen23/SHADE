@@ -1,3 +1,4 @@
 python-twitter==3.4.2
 watson-developer-cloud>=2.1.0
-flask
+Flask
+uwsgi
