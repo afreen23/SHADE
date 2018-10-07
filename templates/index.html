@@ -1,25 +1,39 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>
-            SHADE|Home
-        </title>
-    </head>
-    <body>
-        <button type="submit" value="submit" onclick="handleSubmit()"></button>
-        <script>
-            function handleSubmit() {
-                var xhttp = new XMLHttpRequest();
-                var name=document.getElementById("tweeter")
-                xhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                        console.log("Success")
-                    }   
-                    else
-                        console.log("Failure")
-                };
-                xhttp.open("GET", "http://127.0.0.1:5000/twitter", false);
-            }
-        </script>
-    </body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+   <title>SHADE</title>
+   <script type = "text/javascript" src = "{{ url_for('static', filename = 'index.js') }}" ></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <div class="App">
+        <header class="App-header">
+        <p>Social Health Anaysis And Display Engine</p>
+          <img src="{{ url_for('static', filename='220px-IBM_Watson_Logo_2017.png') }}" class="" alt="logo" />
+          <p>
+            Check your mental health
+          </p>
+          <button class="button" onclick="handleSignin()">
+            Sign in with Twitter
+          </button>
+        </header>
+      </div>
+      <script>
+         
+      </script>
+  </body>
 </html>
+
+
+
+
+
+
+
+
+
+
