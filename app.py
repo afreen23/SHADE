@@ -13,7 +13,7 @@ app.register_blueprint(twitter_blueprint,url_prefix='/login')
 
 @app.route('/')
 def home():
-    return "Success"
+    return render_template('index.html')
 
 @app.route('/twitter')
 def get():
