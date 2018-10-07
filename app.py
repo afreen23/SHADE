@@ -12,11 +12,11 @@ app.register_blueprint(twitter_blueprint,url_prefix='/login')
 #facebook_blueprint = make_facebook_blueprint(client_id=None, client_secret=None, scope=None, redirect_url=None, redirect_to=None, login_url=None, authorized_url=None, session_class=None, backend=None)
 
 @app.route('/')
-def home(self):
+def home():
     return "Success"
 
 @app.route('/twitter')
-def get(self):
+def get():
     if not twitter.authorized:
         return redirect(url_for("twitter.login"))
     resp = twitter.get("account/settings.json")
