@@ -1,13 +1,13 @@
 from flask import Flask,redirect,url_for,jsonify,render_template
 from flask_dance.contrib.twitter import make_twitter_blueprint, twitter
 from flask_cors import CORS,cross_origin
-from keys import CONSUMER_SECRET,CONSUMER_SECRET_KEY
+from keys import CONSUMER_KEY,CONSUMER_SECRET_KEY
 # from flask_restful import Resource,Api
 #from flask_dance.contrib.facebook import make_facebook_blueprint, facebook
 
 app = Flask(__name__)
 CORS(app)
-twitter_blueprint = make_twitter_blueprint(api_key=CONSUMER_SECRET,api_secret=CONSUMER_SECRET_KEY)
+twitter_blueprint = make_twitter_blueprint(api_key=CONSUMER_KEY,api_secret=CONSUMER_SECRET_KEY)
 app.register_blueprint(twitter_blueprint,url_prefix='/login')
 
 #facebook_blueprint = make_facebook_blueprint(client_id=None, client_secret=None, scope=None, redirect_url=None, redirect_to=None, login_url=None, authorized_url=None, session_class=None, backend=None)
